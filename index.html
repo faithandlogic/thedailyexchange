@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Data Page with Saved Articles</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            max-width: 1000px;
+            border: 2px solid black;
+            background-color: white;
+            padding: 20px;
+        }
+
+        .sidebar {
+            width: 250px;
+            border-right: 1px solid black;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+
+        .header {
+            border-bottom: 1px solid black;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .saved-article {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .saved-article:hover {
+            background-color: #f0f0f0;
+        }
+
+        .activity-add {
+            background-color: #7CB9E8;
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .activity-add:hover {
+            background-color: #559AC8;
+        }
+
+        .clear-button {
+            background-color: #E86B6B;
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .clear-button:hover {
+            background-color: #D15959;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <h2>Saved Articles</h2>
+            <div id="saved-articles"></div>
+            <button class="clear-button" onclick="clearArticles()">Clear All Articles</button>
+        </aside>
+        <main class="main-content">
+            <header class="header">
+                <h1>Daily Data</h1>
+                <p id="daily-article">This is today’s article. You can save it and see it on the sidebar.</p>
+                <button class="activity-add" onclick="saveArticle()">Save Article</button>
+            </header>
+        </main>
+    </div>
+
+    <script>
+        const dailyArticleElement = document.getElementById("daily-article");
+        const savedArticlesContainer = document.getElementById("saved-articles");
+
+        function saveArticle() {
+            const articleText = dailyArticleElement.textContent;
+            const articles = loadArticles();
+            const newArticle = {
+                id: articles.length + 1,
+                text: articleText,
+                date: new Date().toLocaleDateString()
+            };
+
+            articles.push(newArticle);
+            localStorage.setItem("articles", JSON.stringify(articles));
+            displaySavedArticles();
+        }
+
+        function loadArticles() {
+            return JSON.parse(localStorage.getItem("articles")) || [];
+        }
+
+        function displaySavedArticles() {
+            const articles = loadArticles();
+            savedArticlesContainer.innerHTML = articles
+                .map(article => `
+                    <div class="saved-article" onclick="showArticle(${article.id})">
+                        <p><strong>Date:</strong> ${article.date}</p>
+                        <p>${article.text.substring(0, 30)}...</p>
+                    </div>
+                `)
+                .join("");
+        }
+
+        function showArticle(id) {
+            const articles = loadArticles();
+            const article = articles.find(a => a.id === id);
+            if (article) {
+                dailyArticleElement.textContent = article.text;
+            }
+        }
+
+        function clearArticles() {
+            localStorage.removeItem("articles");
+            savedArticlesContainer.innerHTML = ""; // Clear sidebar display
+            alert("All saved articles have been cleared.");
+        }
+
+        // Initial load
+        displaySavedArticles();
+    </script>
+</body>
+</html>
