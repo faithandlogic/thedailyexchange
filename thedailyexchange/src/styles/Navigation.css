@@ -1,0 +1,15 @@
+.navigation-header {
+    background-color: #f8f9fa; /* Light gray background for modern design */
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0; /* Subtle border for separation */
+  }
+  
+  .navigation-title {
+    font-family: 'Merriweather', serif; /* Fancy, newspaper-like font */
+    font-size: 2.5rem; /* Large and prominent */
+    font-weight: bold;
+    color: #333; /* Dark text for contrast */
+    margin: 0;
+  }
+  

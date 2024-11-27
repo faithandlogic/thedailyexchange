@@ -1,0 +1,66 @@
+.archive {
+  width: 100%;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #ccc;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.saved-articles {
+  flex: 1;
+  max-width: 70%;
+  overflow-x: auto;
+}
+
+.saved-article {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.saved-article:hover {
+  background-color: #f0f0f0;
+}
+
+.archive-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.save-button,
+.clear-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-button {
+  background-color: #7CB9E8;
+  color: white;
+}
+
+.save-button:hover {
+  background-color: #559AC8;
+}
+
+.clear-button {
+  background-color: #E86B6B;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #D15959;
+}
