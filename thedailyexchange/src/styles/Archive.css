@@ -1,27 +1,34 @@
 .archive {
   width: 100%;
-  padding: 20px;
+  height: 110px; /* Match the height with the banner */
   background-color: #f8f9fa;
   border-top: 1px solid #ccc;
   position: fixed;
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  white-space: nowrap; /* Keep content in a single line */
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 .saved-articles {
-  flex: 1;
-  max-width: 70%;
-  overflow-x: auto;
+  display: flex; /* Flex layout for horizontal scrolling */
+  gap: 10px;
+  overflow: scroll;
+  padding: 10px;
+}
+
+.saved-articles::-webkit-scrollbar {
+  display: none;
 }
 
 .saved-article {
   display: inline-block;
-  margin-right: 10px;
+  margin: 5px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -33,7 +40,9 @@
   background-color: #f0f0f0;
 }
 
+/* Archive actions are inline and align to the right */
 .archive-actions {
+  margin-left: auto; /* Push actions to the right */
   display: flex;
   gap: 10px;
 }

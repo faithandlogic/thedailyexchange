@@ -1,11 +1,12 @@
 /* Centering the article and making it the main focal point */
 .article-container {
     max-width: 1000px; 
-    margin: 40px auto;
+    margin: 40px auto 155px auto;
     padding: 20px;
     background-color: #f9f9f9; 
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    height: auto;
   }
   
   .article-title {
@@ -17,12 +18,17 @@
     color: #333;
   }
   
-  /* Article text styling */
-  .article-text {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: #555;
-    text-align: justify; 
-  }
-  
+/* Article text styling */
+.article-text {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  padding: 5px 20px;
+  color: #555;
+  text-align: justify; 
+  padding-right: 10px; /* Optional: Add padding for scrollbar spacing */
+  margin-bottom: 20px;
+}
+.article-text::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}

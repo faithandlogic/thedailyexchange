@@ -5,6 +5,8 @@ import Banner from './components/Banner';
 import Article from './components/Article';
 import Archive from './components/Archive';
 
+const OPENAI_API_KEY = ""
+
 function App() {
   const [stockData, setStockData] = useState({
     top_gainers: [],
@@ -18,14 +20,11 @@ function App() {
   });
 
   const [articleTitle, setArticleTitle] = useState("Today's Article Title");
-  const [articleContent, setArticleContent] = useState(
-    "This is the new content. You can save it and see it in the archive."
-  );
+  const [articleContent, setArticleContent] = useState("Loading...");
+  const [isArticleGenerated, setIsArticleGenerated] = useState(false); // New flag to track success
 
   const fetchStockData = async () => {
     try {
-      console.log('Using mock data');
-  
       const mockResponse = `
 
       {
@@ -459,16 +458,84 @@ function App() {
         ]
       }
       `;
-  
       const data = JSON.parse(mockResponse);
-  
+
       setStockData({
-        top_gainers: data.top_gainers || [],
-        top_losers: data.top_losers || [],
-        most_actively_traded: data.most_actively_traded || [],
+        top_gainers: data.top_gainers,
+        top_losers: data.top_losers,
+        most_actively_traded: data.most_actively_traded,
       });
     } catch (error) {
       console.error('Error parsing mock data:', error);
+    }
+  };
+
+  const generateArticle = async () => {
+    if (isArticleGenerated) return; // Stop further requests if already successful
+
+    try {
+      let prompt = `Based on the stock data provided, write a comprehensive, engaging, and easy-to-understand financial article as a market analyst. Highlight key market events, explain notable stock movements, and analyze their causes, impacts, and implications for investors. For each stock, briefly describe the company, its industry, and relevant economic or sectoral context. Discuss whether performance aligns with or diverges from industry trends and incorporate historical and socio-economic insights where applicable. 
+
+      Organize the article with clear headers and sections: 
+      1. **Introduction**: Provide a broad market overview, highlighting key trends, standout stocks, and general sentiment (e.g., bullish or bearish). 
+      2. **Top Gainers**: Talk about the gainers, describe each company, and analyze reasons for their performance (e.g., earnings, product launches, or macroeconomic factors)
+      3. **Top Losers**: Focus on major decliners, offering company overviews and potential reasons for the drop (e.g., earnings misses, news, or economic challenges)
+      4. **Most Actively Traded Stocks**: Highlight stocks with the highest trading volumes, explaining interest and trends
+      5. **Implications for Investors**: Summarize what these trends mean for average investors, offering lessons, strategies.
+      6. **Conclusion**: Provide a forward-looking perspective on key events or market factors to watch, with thoughtful commentary on potential future trends.
+      
+      Write the article in ~1,200 words, using a professional yet accessible tone for novice investors. Avoid jargon unless clearly explained. Make sure that the article is in markdown.`;
+      
+      stockData.top_gainers.slice(0, 3).forEach((stock) => {
+        prompt += `
+          Gainer: ${stock.ticker}, 
+          Price: ${stock.price}, 
+          Change: ${stock.change_amount}, 
+          Volume: ${stock.volume}.
+        `;
+      });
+
+      stockData.top_losers.slice(0, 3).forEach((stock) => {
+        prompt += `
+          Loser: ${stock.ticker}, 
+          Price: ${stock.price}, 
+          Change: ${stock.change_amount}, 
+          Volume: ${stock.volume}.
+        `;
+      });
+
+      stockData.most_actively_traded.slice(0, 3).forEach((stock) => {
+        prompt += `
+          Most Traded: ${stock.ticker}, 
+          Price: ${stock.price}, 
+          Change: ${stock.change_amount}, 
+          Volume: ${stock.volume}.
+        `;
+      });
+
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: prompt }],
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.choices && result.choices.length > 0) {
+        setArticleContent(result.choices[0].message.content);
+        setIsArticleGenerated(true); // Mark as successful
+      } else {
+        setArticleContent("No response from AI model.");
+      }
+    } catch (error) {
+      console.error("Failed to generate article", error);
+      setArticleContent("Failed to generate article.");
     }
   };
 
@@ -476,6 +543,11 @@ function App() {
     fetchStockData();
   }, []);
 
+  useEffect(() => {
+    if (!isArticleGenerated) {
+      generateArticle(); // Generate article only if not already successful
+    }
+  }, [stockData, isArticleGenerated]);
 
   const saveArticle = () => {
     const newArticle = {

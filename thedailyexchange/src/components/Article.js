@@ -1,11 +1,14 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import '../styles/Article.css'; // Importing the CSS file for styling
 
 function Article({ title, content }) {
   return (
     <article className="article-container">
       <h1 className="article-title">{title}</h1>
-      <p className="article-text"> {content}      </p>
+      <div className="article-text">
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
     </article>
   );
 }

@@ -4,8 +4,9 @@ import '../styles/Archive.css';
 function Archive({ articles, saveArticle, clearArticles, setArticleFromArchive }) {
   return (
     <div className="archive">
+      <h3>Saved Articles</h3>
+
       <div className="saved-articles">
-        <h3>Saved Articles</h3>
         {articles.map(article => (
           <div
             key={article.id}
