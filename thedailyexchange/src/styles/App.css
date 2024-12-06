@@ -2,8 +2,8 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #ffffff; /* Neutral background to make the article stand out */
-  color: #333;
+  background-color: #1a1a1a; /* Dark background for dark mode */
+  color: #d4d4d4; /* Light text for contrast */
 }
 
 .App {
@@ -15,11 +15,12 @@ body {
 .container {
   display: flex;
   width: 80%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  background-color: white;
+  background-color: #2b2b2b; /* Slightly lighter dark background for container */
+  border: 2px solid #9ac69a; /* Pastel green border */
   padding: 20px;
-  border: 2px solid black;
+  border-radius: 10px; /* Added rounded corners for a softer look */
 }
 
 .main-content {
@@ -28,34 +29,22 @@ body {
 }
 
 .header {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #9ac69a; /* Subtle green for header underline */
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
 .activity-add {
-  background-color: #7CB9E8;
+  background-color: #7fbc8d; /* Pastel green button */
+  color: #1a1a1a; /* Dark text for contrast */
   border-radius: 10px;
   border: none;
   padding: 10px;
   cursor: pointer;
   margin-top: 20px;
+  transition: background-color 0.3s ease;
 }
 
 .activity-add:hover {
-  background-color: #559AC8;
-}
-
-.container {
-  display: flex;
-  width: 80%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: white;
-  border: 2px solid black;
-}
-
-.main-content {
-  flex-grow: 1;
-  padding: 20px;
+  background-color: #6da578; /* Slightly darker green for hover effect */
 }

@@ -1,25 +1,38 @@
 /* Banner container */
 .banner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    width: 100%;
-    height: 100px;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    overflow: hidden;
-  }
-  
-  /* Label for Gainers, Losers, Most Traded */
-.banner-label {
-    font-family: Arial, sans-serif;
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-right: 20px;
-    color: #333;
-    width: 180px;
-    text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100px;
+  background-color: #2b2b2b; /* Dark background for the banner */
+  border-bottom: 1px solid #9ac69a; /* Subtle green bottom border */
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Subtle shadow for depth */
 }
-  
+
+/* Label for Gainers, Losers, Most Traded */
+.banner-label {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 20px;
+  color: #9ac69a; /* Pastel green for the label text */
+  width: 180px;
+  text-align: center;
+}
+
+/* Ticker container */
+.ticker-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+  gap: 10px; /* Add spacing between tickers */
+  padding-left: 10px;
+}
+
+.ticker-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for a cleaner look */
+}

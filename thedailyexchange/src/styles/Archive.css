@@ -1,8 +1,8 @@
 .archive {
   width: 100%;
   height: 110px; /* Match the height with the banner */
-  background-color: #f8f9fa;
-  border-top: 1px solid #ccc;
+  background-color: #2b2b2b; /* Slightly lighter dark mode color for the archive */
+  border-top: 1px solid #9ac69a; /* Pastel green top border */
   position: fixed;
   bottom: 0;
   left: 0;
@@ -11,7 +11,7 @@
   overflow-x: auto; /* Enable horizontal scrolling */
   overflow-y: hidden; /* Prevent vertical scrolling */
   white-space: nowrap; /* Keep content in a single line */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.4); /* Darker shadow for consistency */
   padding: 10px;
 }
 
@@ -23,21 +23,24 @@
 }
 
 .saved-articles::-webkit-scrollbar {
-  display: none;
+  display: none; /* Hide scrollbar for clean look */
 }
 
 .saved-article {
   display: inline-block;
   margin: 5px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: white;
+  border: 1px solid #9ac69a; /* Consistent green border */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #3a3a3a; /* Slightly darker background for saved articles */
+  color: #d4d4d4; /* Light text color for readability */
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .saved-article:hover {
-  background-color: #f0f0f0;
+  background-color: #4a4a4a; /* Subtle dark hover effect */
+  transform: scale(1.05); /* Slight zoom on hover */
 }
 
 /* Archive actions are inline and align to the right */
@@ -54,22 +57,21 @@
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
+  color: #1a1a1a; /* Dark text for contrast on buttons */
 }
 
 .save-button {
-  background-color: #7CB9E8;
-  color: white;
+  background-color: #7fbc8d; /* Pastel green button */
 }
 
 .save-button:hover {
-  background-color: #559AC8;
+  background-color: #6da578; /* Slightly darker green on hover */
 }
 
 .clear-button {
-  background-color: #E86B6B;
-  color: white;
+  background-color: #bc7f7f; /* Subtle red for delete action */
 }
 
 .clear-button:hover {
-  background-color: #D15959;
+  background-color: #a86767; /* Darker red on hover */
 }

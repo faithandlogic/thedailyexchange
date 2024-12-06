@@ -1,51 +1,51 @@
-  /* Horizontal scroll container for tickers */
-  .ticker-container {
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    gap: 10px;
-    padding: 5px;
-  }
-  .ticker-container::-webkit-scrollbar {
-    display: none;
+/* Individual ticker */
+.ticker {
+  background-color: #2b2b2b; /* Dark background for the ticker */
+  border: 1px solid #9ac69a; /* Subtle green border for consistency */
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  width: 100px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Slight shadow for depth */
 }
-  
-  /* Individual ticker */
-  .ticker {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-    width: 100px;
-    flex-shrink: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Ticker name */
-  .ticker-name {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #555;
-  }
-  
-  /* Ticker price */
-  .ticker-price {
-    font-size: 1rem;
-    color: #333;
-  }
-  
-  /* Ticker change - positive or negative */
-  .ticker-change {
-    font-size: 0.9rem;
-    font-weight: bold;
-  }
-  
-  .ticker-change.positive {
-    color: green;
-  }
-  
-  .ticker-change.negative {
-    color: red;
-  }
-  
+
+/* Ticker name */
+.ticker-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #9ac69a; /* Pastel green for the name */
+}
+
+/* Ticker price */
+.ticker-price {
+  font-size: 1rem;
+  color: #d4d4d4; /* Light gray for the price text */
+}
+
+/* Ticker change - positive or negative */
+.ticker-change {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.ticker-change.positive {
+  color: #7fbc8d; /* Pastel green for positive change */
+}
+
+.ticker-change.negative {
+  color: #bc7f7f; /* Subtle red for negative change */
+}
+
+/* Horizontal scroll container for tickers */
+.ticker-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  gap: 10px;
+  padding: 5px;
+}
+
+.ticker-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for clean look */
+}
