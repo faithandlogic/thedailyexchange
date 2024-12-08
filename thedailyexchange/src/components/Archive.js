@@ -2,41 +2,32 @@ import React from "react";
 import "../styles/Archive.css";
 import ArticleItem from "./ArticleItem";
 
-/**
- * Archive component
- * @param articles
- * @param saveArticle
- * @param clearArticles
- * @param deleteArticleById
- * @param setArticleFromArchive
- * @param setSelectedArticle
- * @returns {Element}
- */
-function Archive({
-  articles,
-  saveArticle,
-  clearArticles,
-  deleteArticleById,
-  setArticleFromArchive,
-  setSelectedArticle,
-}) {
+
+
+function Archive({ articles, saveArticle, clearArticles, setArticleFromArchive, deleteArticle }) {
   return (
     <div className="archive">
       <h3>Saved Articles</h3>
 
       <div className="saved-articles">
-        {/* Displaying the list of saved articles */}
-        {articles.map((article) => (
-          //The ArticleItem component used to display each article in the archive
-          <ArticleItem
-            key={article.id}
-            article={article}
-            setArticleFromArchive={setArticleFromArchive}
-            onDelete={deleteArticleById}
-            setSelectedArticle={setSelectedArticle}
-          />
+        {articles.map(article => (
+          <div key={article.id} className="saved-article">
+            <p><strong>Title:</strong> {article.title}</p>
+            <p><strong>Date:</strong> {article.date}</p>
+            <p>{article.content.substring(0, 30)}...</p>
+            <button
+              className="delete-button"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering `setArticleFromArchive` when clicking delete.
+                deleteArticle(article.id); // Use the deleteArticle function passed from App.js
+              }}
+            >
+              ✕
+            </button>
+          </div>
         ))}
       </div>
+
       <div className="archive-actions">
         <button className="save-button" onClick={saveArticle}>
           Save Current Article

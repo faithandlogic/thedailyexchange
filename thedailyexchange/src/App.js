@@ -8,10 +8,7 @@ import { config } from "./config/config";
 import { v4 as uuid } from "uuid";
 import ArticleForm from "./components/ArticleForm";
 
-/**
- * Main App component
- * @returns {Element}
- */
+
 function App() {
   // state to store stock data
   const [stockData, setStockData] = useState({
@@ -85,14 +82,14 @@ function App() {
       let prompt = `Based on the stock data provided, write a comprehensive, engaging, and easy-to-understand financial article from a market analyst perspecitve. Highlight key market events and insights from the data, explain with detail notable stock movements, and analyze their causes, impacts, and implications for investors. For each stock, briefly describe the company, its industry, and relevant economic or sectoral context. Discuss whether performance aligns with or diverges from industry trends and incorporate historical and socio-economic insights where applicable.
 
       Organize the article with clear headers and sections: 
-      1. **Introduction**: Provide a broad market overview, highlighting key trends, standout stocks, and general sentiment (e.g., bullish or bearish). 
-      2. **Top Gainers**: Talk about the gainers, describe each company, and analyze reasons for their performance (e.g., earnings, product launches, or macroeconomic factors)
+      1. **Introduction**: Provide market overview, highlighting key trends, standout stocks, and general sentiment (e.g., bullish or bearish). 
+      2. **Top Gainers**: Talk about gainers, describe each company, and analyze reasons for their performance (e.g., earnings, product launches, or macroeconomic factors)
       3. **Top Losers**: Focus on major decliners, offering company overviews and potential reasons for the drop (e.g., earnings misses, news, or economic challenges)
-      4. **Most Actively Traded Stocks**: Highlight stocks with the highest trading volumes, explaining interest and trends
-      5. **Implications for Investors**: Summarize what these trends mean for average investors, offering lessons, strategies.
+      4. **Most Actively Traded Stocks**: Highlight stocks with highest trading volumes, explaining interest and trends
+      5. **Implications for Investors**: Summarize what trends mean for average investors, offering lessons, strategies.
       6. **Conclusion**: Provide a forward-looking perspective on key events or market factors to watch, with thoughtful commentary on potential future trends.
       
-      Write the article in ~1,200 words, using a professional yet accessible tone for novice investors. Avoid jargon unless clearly explained. Make sure that the article is in markdown. Make sure the tone is not boring and cliche information is avoided.`;
+      Write ~1,200 words, using a professional and accessible tone for novice investors. Avoid jargon unless clearly explained. Make sure that the article is in markdown. Make sure the tone is not boring and cliche information is avoided.`;
 
       stockData.top_gainers.slice(0, 3).forEach((stock) => {
         prompt += `
@@ -134,13 +131,21 @@ function App() {
             messages: [{ role: "user", content: prompt }],
           }),
         },
+        body: JSON.stringify({
+          model: "gpt-4", // Updated to use GPT-4
+          messages: [{ role: "user", content: prompt }],
+        }),
       );
 
       const result = await response.json();
 
       if (result.choices && result.choices.length > 0) {
-        setArticleContent(result.choices[0].message.content);
+        const generatedArticle = result.choices[0].message.content;
+        setArticleContent(generatedArticle);
         setIsArticleGenerated(true);
+
+        // Generate the article title based on the content
+        generateArticleTitle(generatedArticle);
       } else {
         setArticleContent("No response from AI model.");
       }
@@ -150,7 +155,39 @@ function App() {
     }
   };
 
-  // Fetch stock data on component mount
+  const generateArticleTitle = async (article) => {
+    try {
+      const prompt = `Generate a 6 word or less title for the following article content. Return only the title and nothing else. DO NOT ADD quotation marks.
+
+      Article Content:
+      ${article}`;
+
+      const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${APP_OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: "gpt-4", // Updated to use GPT-4
+          messages: [{ role: "user", content: prompt }],
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.choices && result.choices.length > 0) {
+        const title = result.choices[0].message.content.trim();
+        setArticleTitle(title);
+      } else {
+        setArticleTitle("Untitled Article");
+      }
+    } catch (error) {
+      console.error("Failed to generate article title", error);
+      setArticleTitle("Untitled Article");
+    }
+  };
+
   useEffect(() => {
     fetchStockData();
   }, []);
@@ -183,17 +220,12 @@ function App() {
     localStorage.removeItem("articles");
   };
 
-  // Function to delete article by id
-  const deleteArticleById = (id) => {
-    setSelectedArticle(null);
-    const filteredArticles = savedArticles.filter(
-      (article) => article.id !== id,
-    );
-    setSavedArticles(filteredArticles);
-    localStorage.setItem("articles", JSON.stringify(filteredArticles));
+  const deleteArticle = (id) => {
+    const updatedArticles = savedArticles.filter((article) => article.id !== id);
+    setSavedArticles(updatedArticles);
+    localStorage.setItem('articles', JSON.stringify(updatedArticles));
   };
 
-  // Function to set article content from archive
   const setArticleFromArchive = (article) => {
     setArticleTitle(article.title);
     setArticleContent(article.content);
@@ -218,8 +250,7 @@ function App() {
         clearArticles={clearArticles}
         setArticleContent={setArticleContent}
         setArticleFromArchive={setArticleFromArchive}
-        deleteArticleById={deleteArticleById}
-        setSelectedArticle={setSelectedArticle}
+        deleteArticle={deleteArticle}
       />
       {/* ArticleForm component for editing saved articles */}
       {selectedArticle && (

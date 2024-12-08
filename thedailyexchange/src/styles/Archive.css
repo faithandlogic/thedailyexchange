@@ -84,3 +84,33 @@
   background-color: #a86767; /* Darker red on hover */
 }
 
+/* Style for the delete button */
+.delete-button {
+  position: absolute; /* Position it within the saved article */
+  top: 5px; /* Adjust to the desired position */
+  right: 5px; /* Adjust to the desired position */
+  width: 20px; /* Circular shape */
+  height: 20px;
+  border: none;
+  border-radius: 50%; /* Make it circular */
+  background-color: #bc7f7f; /* Subtle red for delete action */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #a86767; /* Darker red on hover */
+  transform: scale(1.2); /* Slightly enlarge on hover */
+}
+
+/* Adjust saved-article container to accommodate the delete button */
+.saved-article {
+  position: relative; /* Make it a positioned container for the delete button */
+}
+
