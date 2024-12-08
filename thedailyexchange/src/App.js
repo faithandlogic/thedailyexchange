@@ -79,9 +79,9 @@ function App() {
     if (isArticleGenerated) return;
 
     try {
-      let prompt = `Based on the stock data provided, write a comprehensive, engaging, and easy-to-understand financial article from a market analyst perspecitve. Highlight key market events and insights from the data, explain with detail notable stock movements, and analyze their causes, impacts, and implications for investors. For each stock, briefly describe the company, its industry, and relevant economic or sectoral context. Discuss whether performance aligns with or diverges from industry trends and incorporate historical and socio-economic insights where applicable.
+      let prompt = `Based on the stock data provided, write a comprehensive, engaging, and easy-to-understand financial article from a market analyst perspecitve. Highlight key market events and insights from the data, explain with detail, and analyze their causes, impacts, and implications. For each stock, briefly describe the company, industry or sector, and economic or sectoral context. Discuss whether performance aligns or diverges from trends and add historical and socio-economic insights.
 
-      Organize the article with clear headers and sections: 
+      Organize the article with clear markdown headers and sections: 
       1. **Introduction**: Provide market overview, highlighting key trends, standout stocks, and general sentiment (e.g., bullish or bearish). 
       2. **Top Gainers**: Talk about gainers, describe each company, and analyze reasons for their performance (e.g., earnings, product launches, or macroeconomic factors)
       3. **Top Losers**: Focus on major decliners, offering company overviews and potential reasons for the drop (e.g., earnings misses, news, or economic challenges)
@@ -89,7 +89,7 @@ function App() {
       5. **Implications for Investors**: Summarize what trends mean for average investors, offering lessons, strategies.
       6. **Conclusion**: Provide a forward-looking perspective on key events or market factors to watch, with thoughtful commentary on potential future trends.
       
-      Write ~1,200 words, using a professional and accessible tone for novice investors. Avoid jargon unless clearly explained. Make sure that the article is in markdown. Make sure the tone is not boring and cliche information is avoided.`;
+      Write ~1,200 words, using a professional and accessible tone for novice investors. Avoid jargon unless clearly explained. Make sure that the article is in markdown. Make sure the tone is not boring and cliche information is avoided. Make sure you only use stock data below:`;
 
       stockData.top_gainers.slice(0, 3).forEach((stock) => {
         prompt += `

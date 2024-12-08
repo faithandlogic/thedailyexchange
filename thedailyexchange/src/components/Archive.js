@@ -1,7 +1,6 @@
 import React from "react";
 import "../styles/Archive.css";
 
-
 function Archive({ articles, saveArticle, clearArticles, setArticleFromArchive, deleteArticle }) {
   return (
     <div className="archive">
@@ -9,7 +8,11 @@ function Archive({ articles, saveArticle, clearArticles, setArticleFromArchive, 
 
       <div className="saved-articles">
         {articles.map(article => (
-          <div key={article.id} className="saved-article">
+          <div 
+            key={article.id} 
+            className="saved-article"
+            onClick={() => setArticleFromArchive(article)} // Call setArticleFromArchive when an article is clicked
+          >
             <p><strong>Title:</strong> {article.title}</p>
             <p><strong>Date:</strong> {article.date}</p>
             <p>{article.content.substring(0, 30)}...</p>
