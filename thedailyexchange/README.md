@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Project Name: The Daily Exchange
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## High-Level Description of Features
+The aim of the web app will be a responsive web-based digital tool that provides users with
+stock market insights for the day in an engaging and informative format with some
+personalization. Using a stock market API, the app will retrieve live data on daily stock
+movements that identify the most significant trends, and generate easy-to-read, tailored articles
+that offer insights into the day’s market activity using generative AI. By integrating real-time data
+with generative AI, this digital assistant will deliver a unique experience that helps users
+understand stock trends, company performance, and broader economic impacts in a narrative
+format.
 
-## Available Scripts
+---
+
+### Key features will include:
+- Live Data Retrieval: Connect to Alpha Vantage’s stock market data API to display key
+data on stock performance, including top gainers and losers, trading volumes, and sector
+movements. And save these data to send to the AI API.
+- AI-Generated Market Articles: Generate daily articles that highlight notable market
+events, offering explanations behind significant changes, potential causes, and
+implications for investors by sending the Live data retrieval from the first feature to the
+OpenAI GPT Chat Completions Endpoint to write an article that can be understood by
+novice investors or enthusiasts. This article will be displayed below the stock data.
+- User Interactivity: Allow users to add articles to a "Saved List,
+" where users can go
+back to their favorite articles and notable days to keep track of the past. (Maybe add a
+notepad feature with open-source react components like MilkDown)
+- Data Persistence: Use local storage to retain user data, such as their saved articles,
+even after browser refreshes.
+- Responsive Design: Ensure the app works seamlessly across desktop and mobile
+devices, adapting to different screen sizes for optimal user access.
+Target User Group & Context
+This project is designed primarily for novice to intermediate investors and finance enthusiasts
+who seek a digestible overview of daily market changes without expertise on market trends. The
+context for using this assistant would likely be part of a user’s daily routine—checking stock
+updates in the morning or evening to stay informed about the latest market developments.
+Student(s) Working on the Project
+
+## How to start
 
 In the project directory, you can run:
+
+### `npm install`
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Authors
+- Fatih Sen, Bowen Yang
