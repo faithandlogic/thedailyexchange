@@ -1,22 +1,40 @@
-import React from 'react';
-import '../styles/Archive.css';
+import React from "react";
+import "../styles/Archive.css";
+import ArticleItem from "./ArticleItem";
 
-function Archive({ articles, saveArticle, clearArticles, setArticleFromArchive }) {
+/**
+ * Archive component
+ * @param articles
+ * @param saveArticle
+ * @param clearArticles
+ * @param deleteArticleById
+ * @param setArticleFromArchive
+ * @param setSelectedArticle
+ * @returns {Element}
+ */
+function Archive({
+  articles,
+  saveArticle,
+  clearArticles,
+  deleteArticleById,
+  setArticleFromArchive,
+  setSelectedArticle,
+}) {
   return (
     <div className="archive">
       <h3>Saved Articles</h3>
 
       <div className="saved-articles">
-        {articles.map(article => (
-          <div
+        {/* Displaying the list of saved articles */}
+        {articles.map((article) => (
+          //The ArticleItem component used to display each article in the archive
+          <ArticleItem
             key={article.id}
-            className="saved-article"
-            onClick={() => setArticleFromArchive(article)}
-          >
-            <p><strong>Title:</strong> {article.title}</p>
-            <p><strong>Date:</strong> {article.date}</p>
-            <p>{article.content.substring(0, 30)}...</p>
-          </div>
+            article={article}
+            setArticleFromArchive={setArticleFromArchive}
+            onDelete={deleteArticleById}
+            setSelectedArticle={setSelectedArticle}
+          />
         ))}
       </div>
       <div className="archive-actions">

@@ -36,6 +36,14 @@
   color: #d4d4d4; /* Light text color for readability */
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.article-delete {
+  position: absolute;
+  right: -9px;
+  top: -9px;
+  z-index: 10;
 }
 
 .saved-article:hover {
@@ -75,3 +83,4 @@
 .clear-button:hover {
   background-color: #a86767; /* Darker red on hover */
 }
+
