@@ -6,8 +6,6 @@ import Article from "./components/Article";
 import Archive from "./components/Archive";
 import { config } from "./config/config";
 import { v4 as uuid } from "uuid";
-import ArticleForm from "./components/ArticleForm";
-
 
 function App() {
   // state to store stock data

@@ -1,25 +1,25 @@
 .archive {
   width: 100%;
-  height: 110px; /* Match the height with the banner */
   background-color: #2b2b2b; /* Slightly lighter dark mode color for the archive */
   border-top: 1px solid #9ac69a; /* Pastel green top border */
   position: fixed;
   bottom: 0;
   left: 0;
   display: flex;
+  flex-direction: column; /* Adjust for responsive vertical stacking */
   align-items: center;
-  overflow-x: auto; /* Enable horizontal scrolling */
-  overflow-y: hidden; /* Prevent vertical scrolling */
-  white-space: nowrap; /* Keep content in a single line */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.4); /* Darker shadow for consistency */
   padding: 10px;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.4); /* Darker shadow for consistency */
 }
 
 .saved-articles {
-  display: flex; /* Flex layout for horizontal scrolling */
+  display: flex;
+  flex-direction: row; /* Default horizontal layout */
   gap: 10px;
-  overflow: scroll;
+  overflow: auto; /* Allow both vertical and horizontal scrolling */
   padding: 10px;
+  max-height: 150px; /* Limit height for vertical scrolling */
+  width: 100%;
 }
 
 .saved-articles::-webkit-scrollbar {
@@ -27,7 +27,8 @@
 }
 
 .saved-article {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   margin: 5px;
   padding: 10px;
   border: 1px solid #9ac69a; /* Consistent green border */
@@ -37,13 +38,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
   position: relative;
-}
-
-.article-delete {
-  position: absolute;
-  right: -9px;
-  top: -9px;
-  z-index: 10;
+  min-width: 150px; /* Ensure a minimum width for responsiveness */
 }
 
 .saved-article:hover {
@@ -53,7 +48,7 @@
 
 /* Archive actions are inline and align to the right */
 .archive-actions {
-  margin-left: auto; /* Push actions to the right */
+  margin-top: 10px;
   display: flex;
   gap: 10px;
 }
@@ -109,8 +104,16 @@
   transform: scale(1.2); /* Slightly enlarge on hover */
 }
 
-/* Adjust saved-article container to accommodate the delete button */
-.saved-article {
-  position: relative; /* Make it a positioned container for the delete button */
-}
+/* Adjust layout for smaller screens */
+@media (max-width: 768px) {
+  .saved-articles {
+    flex-direction: column; /* Switch to vertical layout */
+    max-height: 100px; /* Increase height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Disable horizontal scrolling */
+  }
 
+  .archive {
+    align-items: center; /* Center the content */
+  }
+}
