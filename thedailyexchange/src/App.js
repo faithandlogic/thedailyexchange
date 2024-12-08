@@ -25,7 +25,7 @@ function App() {
   });
 
   // state to store article title and content
-  const [articleTitle, setArticleTitle] = useState("Today's Article Title");
+  const [articleTitle, setArticleTitle] = useState("Loading Today's Article");
   const [articleContent, setArticleContent] = useState("Loading...");
 
   // state to check if article is generating(loading) or not
@@ -247,14 +247,6 @@ function App() {
         setArticleFromArchive={setArticleFromArchive}
         deleteArticle={deleteArticle}
       />
-      {/* ArticleForm component for editing saved articles */}
-      {selectedArticle && (
-        <ArticleForm
-          savedArticles={savedArticles}
-          setSavedArticles={setSavedArticles}
-          article={selectedArticle}
-        />
-      )}
     </div>
   );
 }

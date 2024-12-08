@@ -10,7 +10,7 @@ function PopupCard({ tickerData, onClose }) {
   useEffect(() => {
     const fetchDescription = async () => {
       try {
-        const prompt = `Describe the company behind the ticker ${tickerData.ticker}, Make sure you write out what the actual company name is and what they do so someone who has never heard of it before can get a comprehensive understanding of the company's practices. Make sure it is 4 sentences or less.`;
+        const prompt = `Describe the company: ${tickerData.ticker}, Include the full company name, describe the company so someone can get a comprehensive understanding of the company's practices. Make sure it is 4 sentences or less.`;
 
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
