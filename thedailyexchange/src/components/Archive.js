@@ -1,7 +1,5 @@
 import React from "react";
 import "../styles/Archive.css";
-import ArticleItem from "./ArticleItem";
-
 
 
 function Archive({ articles, saveArticle, clearArticles, setArticleFromArchive, deleteArticle }) {

@@ -49,7 +49,7 @@ function App() {
     }
 
     try {
-      const response = await fetch(config.API_URL);
+      const response = await fetch(API_URL);
       console.log("API_URL", config.API_URL);
       console.log("response", response);
 
@@ -124,18 +124,13 @@ function App() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${config.APP_OPENAI_API_KEY}`,
+            Authorization: `Bearer ${APP_OPENAI_API_KEY}`,
           },
           body: JSON.stringify({
-            model: "gpt-3.5-turbo",
+            model: "gpt-3.5-turbo", // Updated to use GPT-4
             messages: [{ role: "user", content: prompt }],
-          }),
-        },
-        body: JSON.stringify({
-          model: "gpt-4", // Updated to use GPT-4
-          messages: [{ role: "user", content: prompt }],
-        }),
-      );
+          })
+        });
 
       const result = await response.json();
 
