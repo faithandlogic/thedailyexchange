@@ -1,6 +1,13 @@
 import React from 'react';
 import '../styles/Ticker.css';
 
+/**
+ * Ticker component
+ * @param name
+ * @param price
+ * @param changeAmount
+ * @returns {Element}
+ */
 function Ticker({ name, price, changeAmount }) {
   return (
     <div className="ticker">

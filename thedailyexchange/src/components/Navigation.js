@@ -1,6 +1,11 @@
 import React from 'react';
 import '../styles/Navigation.css';
 
+/**
+ * Navigation component
+ * @param data
+ * @returns {Element}
+ */
 function Navigation({ data }) {
   return (
     <header className="navigation-header">
